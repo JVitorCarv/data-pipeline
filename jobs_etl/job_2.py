@@ -1,8 +1,8 @@
-from sqlalchemy import create_engine, Column, Integer, Float, String, ForeignKey
+from sqlalchemy import create_engine, Column, DateTime, Integer, Float, String, ForeignKey
 from sqlalchemy.orm import declarative_base, sessionmaker
 import csv
+from datetime import datetime
 
-# Define your database connection URL
 db_host = "0.0.0.0" 
 db_port = "5432"       
 db_name = "etl-database"   
@@ -10,17 +10,15 @@ db_user = "postgres"
 db_password = "root"  
 db_url = f"postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}"
 
-# Create a SQLAlchemy engine
 engine = create_engine(db_url)
 
-# Define your data model using SQLAlchemy's declarative_base
 Base = declarative_base()
 
 class WorldStockPrice(Base):
     __tablename__ = 'Stock Prices'
 
     id = Column(Integer, primary_key=True)
-    date = Column(String(50))
+    date = Column(DateTime)
     open = Column(Float)
     high = Column(Float)
     low = Column(Float)
@@ -33,10 +31,8 @@ class WorldStockPrice(Base):
     industry_tag = Column(String(50))
     country = Column(String(50))
 
-# Create the database tables (if they don't exist)
 Base.metadata.create_all(engine)
 
-# Create a session
 Session = sessionmaker(bind=engine)
 session = Session()
 
@@ -45,10 +41,10 @@ csv_file = 'raw_data/World-Stock-Prices-Dataset.csv'
 try:
     with open(csv_file, 'r', newline='') as file:
         reader = csv.reader(file)
-        next(reader)  # Skip the header row
+        next(reader)  
         for row in reader:
             stock_price = WorldStockPrice(
-                date=row[0],
+                date=datetime.strptime(row[0], '%Y-%m-%d %H:%M:%S%z'),
                 open=float(row[1]),
                 high=float(row[2]),
                 low=float(row[3]),
