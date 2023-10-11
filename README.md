@@ -1,6 +1,6 @@
 # ReadMe - Setting up Kaggle Environment
 
-This ReadMe provides instructions for setting up your Kaggle environment for seamless use of Kaggle datasets and services. Please follow the steps below to get started.
+This ReadMe provides instructions for setting a ETL Pipeline.
 
 ## Prerequisites
 
@@ -57,7 +57,7 @@ Before you begin, make sure you have the following:
 
 ### 3. Add your Internet IP address
 
-1. Determine your current public Internet IP address by visiting a website such as [WhatIsMyIP.com](https://www.whatismyip.com/).
+1. Determine your current public Internet IP address by using ifconfig command.
 
 2. Create a file named `ip_address.txt` in the directory where you want to run your scripts. This file should contain your public IP address.
 
@@ -95,18 +95,13 @@ Before you begin, make sure you have the following:
 
 ### 6. Execute the `run_all.sh` script
 
-1. Place the `run_all.sh` script in the directory where you want to run your Kaggle-related scripts.
-
-2. Open a terminal or command prompt and navigate to the directory where you placed `run_all.sh`.
-
-3. Run the script:
+1. Execute command to enable script execution:
 
    ```shell
-   bash run_all.sh # Linux/Mac
+   chmod +x run_all.sh
    ```
 
-   or
-
+2. Run the script:
    ```shell
    ./run_all.sh # Linux/Mac (if you have made the script executable)
    ```
@@ -117,6 +112,4 @@ Before you begin, make sure you have the following:
    run_all.sh # Windows (if you have Cygwin or a similar Unix-like environment)
    ```
 
-The `run_all.sh` script will use your Kaggle API key to interact with Kaggle services and use your Internet IP address for any necessary configurations. Ensure that you have any additional dependencies required for your specific Kaggle project.
-
-You are now ready to start using Kaggle datasets and services from your local environment with your API key securely configured. Enjoy your data science and machine learning projects on Kaggle!
+The `run_all.sh` script will use your Kaggle API key to download a dataset, then create a PostgreSQL container for the database where the raw data will be transferred to. It will also spin up Metabase so you can interact with your data visually!
