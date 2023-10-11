@@ -59,14 +59,7 @@ Before you begin, make sure you have the following:
 
 1. Determine your current public Internet IP address by using ifconfig command.
 
-2. Create a file named `ip_address.txt` in the directory where you want to run your scripts. This file should contain your public IP address.
-
-   ```shell
-   echo "YOUR_PUBLIC_IP_ADDRESS" > path/to/ip_address.txt
-   ```
-
-   Replace `YOUR_PUBLIC_IP_ADDRESS` with the actual IP address you obtained in step 1.
-
+2. Go to the file named `ip_address.txt` and place your IP address.
 
 ### 4. Create a Virtual Environment
 
